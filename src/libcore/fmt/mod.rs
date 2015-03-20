@@ -829,6 +829,8 @@ impl<T> Pointer for *const T {
 #[stable(feature = "rust1", since = "1.0.0")]
 impl<T> Pointer for *mut T {
     fn fmt(&self, f: &mut Formatter) -> Result {
+        // FIXME(#23542) Replace with type ascription.
+        #![allow(trivial_cast)]
         Pointer::fmt(&(*self as *const T), f)
     }
 }
@@ -836,6 +838,8 @@ impl<T> Pointer for *mut T {
 #[stable(feature = "rust1", since = "1.0.0")]
 impl<'a, T> Pointer for &'a T {
     fn fmt(&self, f: &mut Formatter) -> Result {
+        // FIXME(#23542) Replace with type ascription.
+        #![allow(trivial_cast)]
         Pointer::fmt(&(*self as *const T), f)
     }
 }
@@ -843,6 +847,8 @@ impl<'a, T> Pointer for &'a T {
 #[stable(feature = "rust1", since = "1.0.0")]
 impl<'a, T> Pointer for &'a mut T {
     fn fmt(&self, f: &mut Formatter) -> Result {
+        // FIXME(#23542) Replace with type ascription.
+        #![allow(trivial_cast)]
         Pointer::fmt(&(&**self as *const T), f)
     }
 }
